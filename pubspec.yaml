@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   get: ^4.6.6
   persistent_bottom_nav_bar: ^6.2.1
+  another_flutter_splash_screen: ^1.2.1
 
 dev_dependencies:
   flutter_test:
