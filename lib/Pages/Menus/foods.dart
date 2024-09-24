@@ -27,7 +27,7 @@ class foodsFragment extends StatelessWidget {
             Container(
               height: 200,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
+                padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Obx(() {
                   return ListView.builder(
                     itemCount: datas.popularitem.length,

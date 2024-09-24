@@ -44,8 +44,9 @@ class datascontroller extends GetxController {
 
   void loadpopular() {
     popularitem.addAll([
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 1", description: "Populer", buttonText: "Iyah", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 2", description: "Populer", buttonText: "Iyah", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 1", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 2", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 3", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
     ]);
 
   }
