@@ -13,7 +13,7 @@ class splashScreen extends StatelessWidget {
         childWidget: SizedBox(
           height: 200,
           width: 200,
-          child: Image.asset("AssetsDrawable/Logo.png"),
+          child: Image.asset("lib/drawable/Logo.png"),
         ),
       nextScreen: const dashboard(),
     );
