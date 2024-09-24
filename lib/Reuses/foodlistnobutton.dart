@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 
 // Reusable custom list item widget
-class CustomListItem extends StatelessWidget {
+class CustomListItemNobutton extends StatelessWidget {
   final String image;
   final String title;
   final String description;
-  final String buttonText;
-  final Color buttonColor;
-  final Color buttonTextColor;
-  final VoidCallback onButtonPressed;
 
-  const CustomListItem({
+  const CustomListItemNobutton({
     super.key,
     required this.image,
     required this.title,
     required this.description,
-    required this.buttonText,
-    required this.buttonColor,
-    required this.buttonTextColor,
-    required this.onButtonPressed,
   });
 
   @override
@@ -36,19 +28,6 @@ class CustomListItem extends StatelessWidget {
               Text(description),
             ],
           ),
-        ),
-        SizedBox(width: 16),
-        ElevatedButton(
-          onPressed: onButtonPressed,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: buttonColor,
-            foregroundColor: buttonTextColor,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          child: Text(buttonText),
         ),
       ],
     );
