@@ -9,7 +9,7 @@ class myTextField extends StatelessWidget {
   final Color fillcolor;
   final bool filled;
   final double rad;
-  final Color borderColor;  // New parameter for border color
+  final Color borderColor;
   final TextEditingController controller;
   final double height;
   final double width;
