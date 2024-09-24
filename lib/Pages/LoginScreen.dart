@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:globalfoodflutter/Reuses/myButton.dart';
 import 'package:globalfoodflutter/Reuses/myTextfield.dart';
 
 class loginPage extends StatelessWidget {
@@ -27,6 +28,8 @@ class loginPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
               child: myTextField(height: 42,width: 350,hintText: "Password",hintstyle: TextStyle(fontSize: 12.5), isObscure: true, textStyle: TextStyle(fontFamily: "Lexend", color: Colors.black87), rad: 6, controller: passwordController, keytype: TextInputType.text, fillcolor: Color.fromARGB(255, 217, 217, 217), filled: true, borderColor: Color.fromARGB(255, 217, 217, 217),),
             ),
+            SizedBox(height: 20,),
+            myButton(textButton: "login", backgroundColor: Colors.redAccent, textColor: Colors.white, radius: 8, elevation: 0, onPressed: () {}),
             Expanded(child: Container()),
           ],
         ),
