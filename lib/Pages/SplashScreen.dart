@@ -15,7 +15,7 @@ class splashScreen extends StatelessWidget {
           width: 200,
           child: Image.asset("lib/drawable/Logo.png"),
         ),
-      nextScreen: const loginPage(),
+      nextScreen: const LoginPage(),
     );
   }
 }

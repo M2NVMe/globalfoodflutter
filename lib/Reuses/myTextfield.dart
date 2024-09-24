@@ -10,9 +10,9 @@ class myTextField extends StatelessWidget {
   final bool filled;
   final double rad;
   final Color borderColor;
-  final TextEditingController controller;
   final double height;
   final double width;
+  final Function(String) onchange;
 
   const myTextField({
     super.key,
@@ -20,11 +20,10 @@ class myTextField extends StatelessWidget {
     required this.isObscure,
     required this.textStyle,
     required this.rad,
-    required this.controller,
     required this.keytype,
     required this.fillcolor,
     required this.filled,
-    required this.borderColor, required this.height, required this.width, required this.hintstyle,
+    required this.borderColor, required this.height, required this.width, required this.hintstyle, required this.onchange,
   });
 
   @override
@@ -35,7 +34,7 @@ class myTextField extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       child: TextField(
         keyboardType: keytype,
-        controller: controller,
+        onChanged: onchange,
         obscureText: isObscure,
         style: textStyle,
         decoration: InputDecoration(
