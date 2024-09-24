@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:globalfoodflutter/Pages/Controllers/Control.dart';
-import 'package:globalfoodflutter/Pages/Menus/foods.dart';
 import 'package:globalfoodflutter/Pages/Menus/home.dart';
+import 'package:globalfoodflutter/Pages/Menus/foods.dart';
 import 'package:globalfoodflutter/Pages/Menus/orders.dart';
 import 'package:globalfoodflutter/Pages/Menus/profile.dart';
 
@@ -16,7 +16,7 @@ class dashboard extends StatelessWidget {
       homeFragment(),
       foodsFragment(),
       ordersFragment(),
-      profileFragment()
+      profileFragment(),
     ];
     return Obx(() {
       return Scaffold(

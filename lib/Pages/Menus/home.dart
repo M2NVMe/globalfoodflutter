@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globalfoodflutter/Reuses/foodlist.dart';
+import 'package:globalfoodflutter/Reuses/foodlistnobutton.dart';
 import 'package:globalfoodflutter/datas/DatasController.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +14,7 @@ class homeFragment extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
           children: [
             SizedBox(height: 50),
             Padding(
@@ -34,7 +35,7 @@ class homeFragment extends StatelessWidget {
                   height: 165,
                   child: Image.asset(
                     'lib/drawable/Logo.png', // Replace with your image asset path
-                    fit: BoxFit.contain,// Ensures the image covers the entire container
+                    fit: BoxFit.contain, // Ensures the image covers the entire container
                   ),
                 ),
               ),
@@ -54,10 +55,8 @@ class homeFragment extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: ListView.builder(itemCount: datas.homeitems.length,itemBuilder: (context, index) {
                   final item = datas.homeitems[index];
-                  return ListTile(
-                    leading: Image.asset(item.image),
-                    title: Text(item.title),
-                    subtitle: Text(item.description),
+                  return Padding(padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+                      child: CustomListItemNobutton(image: item.image, title: item.title, description: item.description),
                   );
                 },),
               ),

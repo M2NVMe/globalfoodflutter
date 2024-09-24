@@ -31,9 +31,9 @@ class CustomListItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TextStyle(fontSize:19, fontWeight: FontWeight.bold),),
+              Text(title, style: TextStyle(fontSize:17, fontWeight: FontWeight.bold),),
               SizedBox(height: 8),
-              Text(description),
+              Text(description, style: TextStyle(fontSize:13, fontWeight: FontWeight.normal),),
             ],
           ),
         ),
