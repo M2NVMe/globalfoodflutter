@@ -56,6 +56,14 @@ dev_dependencies:
 flutter:
   assets:
     - lib/drawable/Logo.png
+  fonts:
+    - family: Lexend
+      fonts:
+        - asset: lib/fonts/Lexend-Regular.ttf
+        - asset: lib/fonts/Lexend-Bold.ttf
+          weight: 700
+        - asset: lib/fonts/Lexend-Medium.ttf
+          weight: 400
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
