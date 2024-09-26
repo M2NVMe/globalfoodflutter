@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get.dart';
 import 'package:globalfoodflutter/Reuses/foodlist.dart';
+import 'package:globalfoodflutter/Reuses/foodlisticonbutton.dart';
 import 'package:globalfoodflutter/Reuses/foodlistnobutton.dart';
 
 class datascontroller extends GetxController {
   var homeitems = <CustomListItemNobutton>[].obs;
   var menuitems = <CustomListItem>[].obs;
   var popularitem = <CustomListItem>[].obs;
+  var orderitem = <Foodlisticonbutton>[].obs;
 
   @override
   void onInit() {
@@ -17,6 +19,7 @@ class datascontroller extends GetxController {
     loadhomeitems();
     loadmenuitems();
     loadpopular();
+    ordersitem();
   }
 
   void loadhomeitems() {
@@ -48,6 +51,11 @@ class datascontroller extends GetxController {
       CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 2", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
       CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 3", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
     ]);
+  }
 
+  void ordersitem() {
+    orderitem.addAll([
+      Foodlisticonbutton(image: "lib/drawable/Logo.png", title: "Testing", description: "Testing", icon: Icon(Icons.cancel, color: Colors.white,), buttonColor: Colors.redAccent, onButtonPressed: () {}),
+    ]);
   }
 }
