@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get.dart';
 import 'package:globalfoodflutter/Reuses/foodlist.dart';
 import 'package:globalfoodflutter/Reuses/foodlisticonbutton.dart';
 import 'package:globalfoodflutter/Reuses/foodlistnobutton.dart';
@@ -19,7 +18,6 @@ class datascontroller extends GetxController {
     loadhomeitems();
     loadmenuitems();
     loadpopular();
-    ordersitem();
   }
 
   void loadhomeitems() {
@@ -35,27 +33,41 @@ class datascontroller extends GetxController {
 
   void loadmenuitems() {
     menuitems.addAll([
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 1", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 2", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 3", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 4", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 5", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 6", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 7", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 1", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Makanan Utama 1", "Iyah");}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 2", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Makanan Utama 2", "Iyah");}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 3", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Makanan Utama 3", "Iyah");}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 4", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Makanan Utama 4", "Iyah");}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 5", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Makanan Utama 5", "Iyah");}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 6", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Makanan Utama 6", "Iyah");}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Utama 7", description: "Cihuy", buttonText: "Iyah", buttonColor: Colors.redAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Makanan Utama 7", "Iyah");}),
     ]);
   }
 
   void loadpopular() {
     popularitem.addAll([
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 1", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 2", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
-      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 3", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 1", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Populer", "Populer");}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 2", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Populer", "Populer");}),
+      CustomListItem(image: "lib/drawable/Logo.png", title: "Ini makanan Pop 3", description: "Populer", buttonText: "Nggih", buttonColor: Colors.greenAccent, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/Logo.png", "Populer", "Populer");}),
     ]);
   }
 
-  void ordersitem() {
-    orderitem.addAll([
-      Foodlisticonbutton(image: "lib/drawable/Logo.png", title: "Testing", description: "Testing", icon: Icon(Icons.cancel, color: Colors.white,), buttonColor: Colors.redAccent, onButtonPressed: () {}),
-    ]);
+  void removeFromOrders(int index) {
+    if (index >= 0 && index < orderitem.length) {
+      orderitem.removeAt(index);
+    } else {
+      print("Invalid index: $index"); // Debugging purpose
+    }
   }
+
+  void addToOrders(String image, String title, String description) {
+    orderitem.add(Foodlisticonbutton(
+      image: image,
+      title: title,
+      description: description,
+      icon: Icon(Icons.cancel, color: Colors.white),
+      buttonColor: Colors.redAccent,
+      onButtonPressed: () => removeFromOrders(orderitem.length - 1),
+    ));
+  }
+
 }

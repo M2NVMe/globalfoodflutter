@@ -42,7 +42,7 @@ class ordersFragment extends StatelessWidget {
                           description: item.description,
                           icon: item.icon,
                           buttonColor: item.buttonColor,
-                          onButtonPressed: item.onButtonPressed,
+                          onButtonPressed: () => datas.removeFromOrders(index), // Pass the correct index
                         ),
                       );
                     },
@@ -51,21 +51,29 @@ class ordersFragment extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Container(child: Row(
-              children: [
-                Expanded(child: Container()),
-                Column(
+            Container(
+              child: Row(
+                children: [
+                  Expanded(child: Container()),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Accepted payment type:", style: TextStyle(fontFamily: "Lexend"),),
-                    Text("Cash Only", style: TextStyle(fontFamily: "Lexend")),
-                  ],
-                ),
-                SizedBox(width: 90,),
-                myButton(textButton: "Pay", backgroundColor: Colors.greenAccent, textColor: Colors.white, radius: 6, elevation: 0, onPressed: () {}),
-                Expanded(child: Container()),
-              ],
-            ),
+                    children: [
+                      Text("Accepted payment type:", style: TextStyle(fontFamily: "Lexend")),
+                      Text("Cash Only", style: TextStyle(fontFamily: "Lexend")),
+                    ],
+                  ),
+                  SizedBox(width: 90),
+                  myButton(
+                    textButton: "Pay",
+                    backgroundColor: Colors.greenAccent,
+                    textColor: Colors.white,
+                    radius: 6,
+                    elevation: 0,
+                    onPressed: () {},
+                  ),
+                  Expanded(child: Container()),
+                ],
+              ),
             ),
             SizedBox(height: 10),
           ],
