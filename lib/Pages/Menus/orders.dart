@@ -42,7 +42,7 @@ class ordersFragment extends StatelessWidget {
                           description: item.description,
                           icon: item.icon,
                           buttonColor: item.buttonColor,
-                          onButtonPressed: () => datas.removeFromOrders(index), // Pass the correct index
+                          onButtonPressed: () => datas.removeFromOrders(index),
                         ),
                       );
                     },
@@ -69,7 +69,7 @@ class ordersFragment extends StatelessWidget {
                     textColor: Colors.white,
                     radius: 6,
                     elevation: 0,
-                    onPressed: () {},
+                    onPressed: () => datas.clearOrders(),
                   ),
                   Expanded(child: Container()),
                 ],

@@ -5,6 +5,22 @@ class profileFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: [
+            SizedBox(height: 50),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                "Ini Profile",
+                style: TextStyle(fontFamily: "Lexend", fontSize: 16),
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

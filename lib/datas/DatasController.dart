@@ -59,6 +59,16 @@ class datascontroller extends GetxController {
     }
   }
 
+  void clearOrders() {
+    if (orderitem.isNotEmpty) {
+      orderitem.clear();
+      print("All items removed from orders."); // Optional for debugging
+    } else {
+      print("Order list is already empty."); // Optional for debugging
+    }
+  }
+
+
   void addToOrders(String image, String title, String description) {
     orderitem.add(Foodlisticonbutton(
       image: image,
