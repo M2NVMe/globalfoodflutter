@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class myButton extends StatelessWidget {
-  final String textButton;
+  final Widget textButton;
   final Color backgroundColor;
   final Color textColor;
   final double radius;
@@ -27,6 +27,6 @@ class myButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(radius)
             )
         ),
-        child: Text(textButton));
+        child: textButton);
   }
 }

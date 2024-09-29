@@ -64,7 +64,7 @@ class ordersFragment extends StatelessWidget {
                   ),
                   SizedBox(width: 90),
                   myButton(
-                    textButton: "Pay",
+                    textButton: Text("Login"),
                     backgroundColor: Colors.greenAccent,
                     textColor: Colors.white,
                     radius: 6,

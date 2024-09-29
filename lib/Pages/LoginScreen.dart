@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 20,),
             myButton(
-              textButton: "login",
+              textButton: Text("Login"),
               backgroundColor: Colors.redAccent,
               textColor: Colors.white,
               radius: 8,
