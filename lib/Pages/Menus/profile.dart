@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:globalfoodflutter/Reuses/myButton.dart';
+import 'package:get/get.dart';
 
 class profileFragment extends StatelessWidget {
   const profileFragment({super.key});
@@ -73,7 +76,7 @@ class profileFragment extends StatelessWidget {
                     textColor: Colors.white,
                     radius: 8,
                     elevation: 0,
-                    onPressed: () {})),
+                    onPressed: () {exit(0);})),
             Container(height: 70,),
           ],
         ),

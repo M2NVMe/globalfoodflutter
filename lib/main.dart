@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => splashScreen()),
+        GetPage(name: '/', page: () => SplashScreen()),
         GetPage(name: '/Dashboard', page: () => dashboard()),
         GetPage(name: '/Login', page: () => LoginPage())
       ],
