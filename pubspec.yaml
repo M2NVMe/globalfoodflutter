@@ -56,6 +56,9 @@ dev_dependencies:
 flutter:
   assets:
     - lib/drawable/Logo.png
+    - lib/drawable/fotomakanan/burger1.jpg
+    - lib/drawable/fotomakanan/pizza1.jpg
+    - lib/drawable/fotomakanan/icecream1.jpg
   fonts:
     - family: Lexend
       fonts:

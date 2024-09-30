@@ -17,9 +17,12 @@ class CustomListItemNobutton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        image.startsWith('http')
-            ? Image.network(image, height: 80, width: 80, fit: BoxFit.cover)
-            : Image.asset(image, height: 80, width: 80, fit: BoxFit.cover),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: image.startsWith('http')
+              ? Image.network(image, height: 80, width: 80, fit: BoxFit.cover)
+              : Image.asset(image, height: 80, width: 80, fit: BoxFit.cover),
+        ),
         SizedBox(width: 16),
         Expanded(
           child: Column(

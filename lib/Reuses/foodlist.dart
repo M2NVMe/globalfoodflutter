@@ -26,9 +26,12 @@ class CustomListItem extends StatelessWidget {
     return Row(
       children: [
         // Check if the image is a URL and load accordingly
-        image.startsWith('http')
-            ? Image.network(image, height: 80, width: 80, fit: BoxFit.cover)
-            : Image.asset(image, height: 80, width: 80, fit: BoxFit.cover),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: image.startsWith('http')
+              ? Image.network(image, height: 80, width: 80, fit: BoxFit.cover)
+              : Image.asset(image, height: 80, width: 80, fit: BoxFit.cover),
+        ),
         SizedBox(width: 16),
         Expanded(
           child: Column(
