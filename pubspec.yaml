@@ -59,6 +59,10 @@ flutter:
     - lib/drawable/fotomakanan/burger1.jpg
     - lib/drawable/fotomakanan/pizza1.jpg
     - lib/drawable/fotomakanan/icecream1.jpg
+    - lib/drawable/fotomakanan/spaget1.jpg
+    - lib/drawable/fotomakanan/belgiumfries.png
+    - lib/drawable/fotomakanan/cendol.jpg
+    - lib/drawable/fotomakanan/bolu.png
   fonts:
     - family: Lexend
       fonts:
