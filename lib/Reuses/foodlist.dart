@@ -25,15 +25,24 @@ class CustomListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(image, height: 80, width: 80,),
+        // Check if the image is a URL and load accordingly
+        image.startsWith('http')
+            ? Image.network(image, height: 80, width: 80, fit: BoxFit.cover)
+            : Image.asset(image, height: 80, width: 80, fit: BoxFit.cover),
         SizedBox(width: 16),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TextStyle(fontSize:17, fontWeight: FontWeight.bold),),
+              Text(
+                title,
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 8),
-              Text(description, style: TextStyle(fontSize:13, fontWeight: FontWeight.normal),),
+              Text(
+                description,
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal),
+              ),
             ],
           ),
         ),
