@@ -34,7 +34,7 @@ class homeFragment extends StatelessWidget {
                   width: 355,
                   height: 165,
                   child: Image.asset(
-                    'lib/drawable/Logo.png', // Replace with your image asset path
+                    'lib/drawable/Welcome.png', // Replace with your image asset path
                     fit: BoxFit.contain, // Ensures the image covers the entire container
                   ),
                 ),
