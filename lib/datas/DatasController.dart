@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import 'package:globalfoodflutter/Reuses/foodlist.dart';
 import 'package:globalfoodflutter/Reuses/foodlisticonbutton.dart';
 import 'package:globalfoodflutter/Reuses/foodlistnobutton.dart';
+import 'package:globalfoodflutter/datas/newLocalDatabasethingamajig.dart';
 
 class datascontroller extends GetxController {
   var homeitems = <CustomListItemNobutton>[].obs;
   var menuitems = <CustomListItem>[].obs;
   var popularitem = <CustomListItem>[].obs;
   var orderitem = <Foodlisticonbutton>[].obs;
+  DatabaseHelper dbHelper = DatabaseHelper();
 
   @override
   void onInit() {
@@ -50,33 +52,47 @@ class datascontroller extends GetxController {
     ]);
   }
 
-  void removeFromOrders(int index) {
+  void addToOrders(String image, String title, String description) async {
+    // Add to local database
+    await dbHelper.insertOrder({
+      'image': image,
+      'title': title,
+      'description': description,
+    });
+
+    // Reload orders from the database
+    loadOrdersFromDatabase();
+  }
+
+  void loadOrdersFromDatabase() async {
+    List<Map<String, dynamic>> orders = await dbHelper.getOrders();
+    orderitem.clear();
+    for (var order in orders) {
+      orderitem.add(
+        Foodlisticonbutton(
+          image: order['image'],
+          title: order['title'],
+          description: order['description'],
+          icon: Icon(Icons.cancel, color: Colors.white),
+          buttonColor: Colors.redAccent,
+          onButtonPressed: () => removeFromOrders(orderitem.indexOf(order)),
+        ),
+      );
+    }
+  }
+
+  void removeFromOrders(int index) async {
     if (index >= 0 && index < orderitem.length) {
-      orderitem.removeAt(index);
+      await dbHelper.deleteOrder(index + 1); // Assuming the index matches the database ID
+      loadOrdersFromDatabase();
     } else {
-      print("Invalid index: $index"); // Debugging purpose
+      print("Invalid index: $index");
     }
   }
 
-  void clearOrders() {
-    if (orderitem.isNotEmpty) {
-      orderitem.clear();
-      print("All items removed from orders."); // Optional for debugging
-    } else {
-      print("Order list is already empty."); // Optional for debugging
-    }
-  }
-
-
-  void addToOrders(String image, String title, String description) {
-    orderitem.add(Foodlisticonbutton(
-      image: image,
-      title: title,
-      description: description,
-      icon: Icon(Icons.cancel, color: Colors.white),
-      buttonColor: Colors.redAccent,
-      onButtonPressed: () => removeFromOrders(orderitem.length - 1),
-    ));
+  void clearOrders() async {
+    await dbHelper.clearOrders();
+    loadOrdersFromDatabase();
   }
 
 }
