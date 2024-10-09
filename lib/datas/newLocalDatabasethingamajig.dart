@@ -4,10 +4,9 @@ import 'package:path/path.dart';
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   factory DatabaseHelper() => _instance;
+  DatabaseHelper._internal();
 
   static Database? _database;
-
-  DatabaseHelper._internal();
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -20,17 +19,24 @@ class DatabaseHelper {
     return await openDatabase(
       path,
       version: 1,
-      onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE orders(id INTEGER PRIMARY KEY, image TEXT, title TEXT, description TEXT)',
+      onCreate: (db, version) async {
+        await db.execute(
+            '''
+          CREATE TABLE orders(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            image TEXT,
+            title TEXT,
+            description TEXT
+          )
+          '''
         );
       },
     );
   }
 
-  Future<void> insertOrder(Map<String, dynamic> order) async {
+  Future<int> insertOrder(Map<String, dynamic> order) async {
     final db = await database;
-    await db.insert('orders', order, conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert('orders', order);
   }
 
   Future<List<Map<String, dynamic>>> getOrders() async {
@@ -38,13 +44,13 @@ class DatabaseHelper {
     return await db.query('orders');
   }
 
-  Future<void> deleteOrder(int id) async {
+  Future<int> deleteOrder(int id) async {
     final db = await database;
-    await db.delete('orders', where: 'id = ?', whereArgs: [id]);
+    return await db.delete('orders', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<void> clearOrders() async {
+  Future<int> clearOrders() async {
     final db = await database;
-    await db.delete('orders');
+    return await db.delete('orders');
   }
 }

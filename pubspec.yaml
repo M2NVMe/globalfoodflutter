@@ -36,6 +36,7 @@ dependencies:
   get: ^4.6.6
   persistent_bottom_nav_bar: ^6.2.1
   sqflite: ^2.0.0+4
+  path: ^1.8.0
   path_provider: ^2.0.14
 
 

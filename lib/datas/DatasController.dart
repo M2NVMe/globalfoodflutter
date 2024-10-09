@@ -20,6 +20,7 @@ class datascontroller extends GetxController {
     loadhomeitems();
     loadmenuitems();
     loadpopular();
+    loadOrdersFromDatabase();
   }
 
   void loadhomeitems() {
@@ -53,46 +54,41 @@ class datascontroller extends GetxController {
   }
 
   void addToOrders(String image, String title, String description) async {
-    // Add to local database
     await dbHelper.insertOrder({
       'image': image,
       'title': title,
       'description': description,
     });
 
-    // Reload orders from the database
-    loadOrdersFromDatabase();
+    loadOrdersFromDatabase(); // Refresh the UI with new data from DB
   }
 
+  // Load orders from local database
   void loadOrdersFromDatabase() async {
     List<Map<String, dynamic>> orders = await dbHelper.getOrders();
-    orderitem.clear();
+    orderitem.clear();  // Clear current list
     for (var order in orders) {
-      orderitem.add(
-        Foodlisticonbutton(
-          image: order['image'],
-          title: order['title'],
-          description: order['description'],
-          icon: Icon(Icons.cancel, color: Colors.white),
-          buttonColor: Colors.redAccent,
-          onButtonPressed: () => removeFromOrders(orderitem.indexOf(order)),
-        ),
-      );
+      orderitem.add(Foodlisticonbutton(
+        image: order['image'],
+        title: order['title'],
+        description: order['description'],
+        icon: Icon(Icons.cancel, color: Colors.white),
+        buttonColor: Colors.redAccent,
+        onButtonPressed: () => removeFromOrders(order['id']),
+      ));
     }
   }
 
-  void removeFromOrders(int index) async {
-    if (index >= 0 && index < orderitem.length) {
-      await dbHelper.deleteOrder(index + 1); // Assuming the index matches the database ID
-      loadOrdersFromDatabase();
-    } else {
-      print("Invalid index: $index");
-    }
+  // Remove order from local database and reload
+  void removeFromOrders(int id) async {
+    await dbHelper.deleteOrder(id);  // Remove item from DB using its id
+    loadOrdersFromDatabase();        // Refresh the UI
   }
 
+  // Clear all orders from local database and reload
   void clearOrders() async {
     await dbHelper.clearOrders();
-    loadOrdersFromDatabase();
+    loadOrdersFromDatabase();        // Refresh the UI
   }
 
 }
