@@ -60,13 +60,13 @@ class datascontroller extends GetxController {
       'description': description,
     });
 
-    loadOrdersFromDatabase(); // Refresh the UI with new data from DB
+    loadOrdersFromDatabase(); // Refresh
   }
 
-  // Load orders from local database
+  // Load
   void loadOrdersFromDatabase() async {
     List<Map<String, dynamic>> orders = await dbHelper.getOrders();
-    orderitem.clear();  // Clear current list
+    orderitem.clear();
     for (var order in orders) {
       orderitem.add(Foodlisticonbutton(
         image: order['image'],
@@ -79,16 +79,16 @@ class datascontroller extends GetxController {
     }
   }
 
-  // Remove order from local database and reload
+  // Remove selected order
   void removeFromOrders(int id) async {
-    await dbHelper.deleteOrder(id);  // Remove item from DB using its id
-    loadOrdersFromDatabase();        // Refresh the UI
+    await dbHelper.deleteOrder(id);
+    loadOrdersFromDatabase();
   }
 
-  // Clear all orders from local database and reload
+  // Basically buy all tapi di samarkan aowkoawkoawko
   void clearOrders() async {
     await dbHelper.clearOrders();
-    loadOrdersFromDatabase();        // Refresh the UI
+    loadOrdersFromDatabase();
   }
 
 }
