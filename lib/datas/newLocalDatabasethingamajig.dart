@@ -38,6 +38,7 @@ class DatabaseHelper {
   //pesan untuk pak aji
   //jadi ada masalah dimana autoincrementnya mulai dari nomor 1, namun untuk deletenya mulai dari nomor 0
   //saya telah mencoba berbagai macam cara untuk mengatasinya, tetapi masih tetap muncul permasalahannya
+  //kodingan saya sudah mirip dengan kodingannya bapak
   //
 
 
