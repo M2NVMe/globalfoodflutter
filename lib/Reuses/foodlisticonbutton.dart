@@ -5,7 +5,6 @@ class Foodlisticonbutton extends StatelessWidget {
   final String image;
   final String title;
   final String description;
-  final Icon icon;
   final Color buttonColor;
   final VoidCallback onButtonPressed;
 
@@ -14,7 +13,6 @@ class Foodlisticonbutton extends StatelessWidget {
     required this.image,
     required this.title,
     required this.description,
-    required this.icon,
     required this.buttonColor,
     required this.onButtonPressed,
   });
@@ -41,7 +39,7 @@ class Foodlisticonbutton extends StatelessWidget {
           ),
         ),
         SizedBox(width: 16),
-        IconButton(onPressed: onButtonPressed, icon: icon, style: IconButton.styleFrom(backgroundColor: buttonColor,),),
+        IconButton(onPressed: onButtonPressed, icon: Icon(Icons.cancel_outlined), style: IconButton.styleFrom(backgroundColor: buttonColor,),),
       ],
     );
   }

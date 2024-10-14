@@ -4,13 +4,18 @@ import 'package:globalfoodflutter/Reuses/foodlisticonbutton.dart';
 import 'package:globalfoodflutter/Reuses/myButton.dart';
 import 'package:globalfoodflutter/datas/DatasController.dart';
 import 'package:get/get.dart';
+import 'package:globalfoodflutter/datas/newLocalDatabasethingamajig.dart';
 
 class ordersFragment extends StatelessWidget {
   const ordersFragment({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final datascontroller datas = Get.put(datascontroller());
+    final DatabaseHelper datas = Get.put(DatabaseHelper());
+
+    // Ensure orders are loaded when the fragment is first built
+    datas.loadOrders();
+
     return Scaffold(
       body: Container(
         child: Column(
@@ -31,18 +36,23 @@ class ordersFragment extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Obx(() {
                   return ListView.builder(
-                    itemCount: datas.orderitem.length,
+                    itemCount: datas.orders.length,
                     itemBuilder: (context, index) {
-                      final item = datas.orderitem[index];
+                      final item = datas.orders[index];
+
+                      // Ensure that the map contains all keys before accessing them
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
                         child: Foodlisticonbutton(
-                          image: item.image,
-                          title: item.title,
-                          description: item.description,
-                          icon: item.icon,
-                          buttonColor: item.buttonColor,
-                          onButtonPressed: () => datas.removeFromOrders(index),
+                          image: item['image'] ?? '', // Use null-aware operators
+                          title: item['title'] ?? '',
+                          description: item['description'] ?? '',
+                          buttonColor: Colors.redAccent,
+                          onButtonPressed: () {
+                            if (item['id'] != null) {
+                              datas.deleteOrder(item['id']); // Ensure ID is not null
+                            }
+                          },
                         ),
                       );
                     },

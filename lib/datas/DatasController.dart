@@ -20,7 +20,7 @@ class datascontroller extends GetxController {
     loadhomeitems();
     loadmenuitems();
     loadpopular();
-    loadOrdersFromDatabase();
+    dbHelper.loadOrders();
   }
 
   void loadhomeitems() {
@@ -52,41 +52,29 @@ class datascontroller extends GetxController {
   }
 
   void addToOrders(String image, String title, String description) async {
-    await dbHelper.insertOrder({
+    await dbHelper.addOrder({
       'image': image,
       'title': title,
       'description': description,
     });
-
-    loadOrdersFromDatabase(); // Refresh
+    updateOrderItems();
   }
 
-  // Load
-  void loadOrdersFromDatabase() async {
-    List<Map<String, dynamic>> orders = await dbHelper.getOrders();
+  void updateOrderItems() {
     orderitem.clear();
-    for (var order in orders) {
+    for (var order in dbHelper.orders) {
       orderitem.add(Foodlisticonbutton(
         image: order['image'],
         title: order['title'],
         description: order['description'],
-        icon: Icon(Icons.cancel, color: Colors.white),
         buttonColor: Colors.redAccent,
-        onButtonPressed: () => removeFromOrders(order['id']),
+        onButtonPressed: () => dbHelper.deleteOrder(order['id']),
       ));
     }
   }
 
-  // Remove selected order
-  void removeFromOrders(int id) async {
-    await dbHelper.deleteOrder(id);
-    loadOrdersFromDatabase();
-  }
-
-  // Basically buy all tapi di samarkan aowkoawkoawko
   void clearOrders() async {
     await dbHelper.clearOrders();
-    loadOrdersFromDatabase();
+    updateOrderItems();
   }
-
 }

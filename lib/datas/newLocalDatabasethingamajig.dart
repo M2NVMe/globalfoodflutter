@@ -1,81 +1,75 @@
+import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper _instance = DatabaseHelper._internal();
-  factory DatabaseHelper() => _instance;
-  DatabaseHelper._internal();
+class DatabaseHelper extends GetxController {
+  static Database? _db;
 
-  static Database? _database;
+  var orders = <Map<String, dynamic>>[].obs;
 
-  Future<Database> get database async {
-    if (_database != null) return _database!;
-    _database = await _initDatabase();
-    return _database!;
+  // Getter to access the database
+  Future<Database?> get db async {
+    if (_db == null) {
+      _db = await initDB();
+    }
+    return _db;
   }
 
-  Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'orders.db');
+  // Initialize the database
+  Future<Database> initDB() async {
+    var databasePath = await getDatabasesPath();
+    String path = join(databasePath, 'orders_database.db');
+
     return await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
-        await db.execute(
-            '''
+        await db.execute('''
           CREATE TABLE orders(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             image TEXT,
             title TEXT,
             description TEXT
           )
-          '''
-        );
+        ''');
       },
     );
   }
 
-  //
-  //pesan untuk pak aji
-  //jadi ada masalah dimana autoincrementnya mulai dari nomor 1, namun untuk deletenya mulai dari nomor 0
-  //saya telah mencoba berbagai macam cara untuk mengatasinya, tetapi masih tetap muncul permasalahannya
-  //kodingan saya sudah mirip dengan kodingannya bapak
-  //
-
-
-  Future<int> insertOrder(Map<String, dynamic> order) async {
-    final db = await database;
-    int id = await db.insert('orders', order);
-    print('Inserted order with id: $id');  // Print the index after insertion
-    return id;
+  // Insert a new order
+  Future<int> addOrder(Map<String, dynamic> order) async {
+    var dbClient = await db;
+    int result = await dbClient!.insert('orders', order);
+    loadOrders(); // Refresh orders after insertion
+    return result;
   }
 
-  Future<List<Map<String, dynamic>>> getOrders() async {
-    final db = await database;
-    return await db.query('orders');
+  // Load all orders from the database
+  Future<void> loadOrders() async {
+    var dbClient = await db;
+    List<Map<String, dynamic>> queryResult = await dbClient!.query('orders');
+    orders.assignAll(queryResult); // Assign the result to the observable list
   }
 
-  Future<int> deleteOrder(int id) async {
-    final db = await database;
-    int rowsDeleted = await db.delete('orders', where: 'id = ?', whereArgs: [id]);
-    print('Deleted order with id: $id');  // Print the index after deletion
-    return rowsDeleted;
+  // Delete a specific order by ID
+  Future<void> deleteOrder(int id) async {
+    var dbClient = await db;
+    await dbClient!.delete('orders', where: 'id = ?', whereArgs: [id]);
+    loadOrders(); // Refresh orders after deletion
   }
 
-  Future<int> clearOrders() async {
-    final db = await database;
-    // Drop the table
-    await db.execute('DROP TABLE IF EXISTS orders');
-    // Recreate the table
-    await db.execute('''
-    CREATE TABLE orders(
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      image TEXT,
-      title TEXT,
-      description TEXT
-    )
-  ''');
-    print('Orders cleared and index reset');
-    return 1;
+  // Clear all orders and reset the table (including resetting the autoincrement index)
+  Future<void> clearOrders() async {
+    var dbClient = await db;
+    await dbClient!.execute('DROP TABLE IF EXISTS orders');
+    await dbClient!.execute('''
+      CREATE TABLE orders(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        image TEXT,
+        title TEXT,
+        description TEXT
+      )
+    ''');
+    loadOrders(); // Reload after clearing orders
   }
-
 }
