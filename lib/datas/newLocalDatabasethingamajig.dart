@@ -36,7 +36,9 @@ class DatabaseHelper {
 
   Future<int> insertOrder(Map<String, dynamic> order) async {
     final db = await database;
-    return await db.insert('orders', order);
+    int id = await db.insert('orders', order);
+    print('Inserted order with id: $id');  // Print the index after insertion
+    return id;
   }
 
   Future<List<Map<String, dynamic>>> getOrders() async {
@@ -46,11 +48,26 @@ class DatabaseHelper {
 
   Future<int> deleteOrder(int id) async {
     final db = await database;
-    return await db.delete('orders', where: 'id = ?', whereArgs: [id + 1]);
+    int rowsDeleted = await db.delete('orders', where: 'id = ?', whereArgs: [id]);
+    print('Deleted order with id: $id');  // Print the index after deletion
+    return rowsDeleted;
   }
 
   Future<int> clearOrders() async {
     final db = await database;
-    return await db.delete('orders');
+    // Drop the table
+    await db.execute('DROP TABLE IF EXISTS orders');
+    // Recreate the table
+    await db.execute('''
+    CREATE TABLE orders(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      image TEXT,
+      title TEXT,
+      description TEXT
+    )
+  ''');
+    print('Orders cleared and index reset');
+    return 1;
   }
+
 }
