@@ -53,12 +53,26 @@ class homeFragment extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: ListView.builder(itemCount: datas.homeitems.length,itemBuilder: (context, index) {
-                  final item = datas.homeitems[index];
-                  return Padding(padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
-                      child: CustomListItemNobutton(image: item.image, title: item.title, description: item.description),
+                child: Obx(() {
+                  return ListView.builder(
+                    itemCount: datas.homeitems.length,
+                    itemBuilder: (context, index) {
+                      final item = datas.popularitem[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+                        child: CustomListItem(
+                          image: item.image,
+                          title: item.title,
+                          description: item.description,
+                          buttonText: item.buttonText,
+                          buttonColor: item.buttonColor,
+                          buttonTextColor: item.buttonTextColor,
+                          onButtonPressed: item.onButtonPressed,
+                        ),
+                      );
+                    },
                   );
-                },),
+                }),
               ),
             ),
           ],
