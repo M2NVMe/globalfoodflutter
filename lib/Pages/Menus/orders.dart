@@ -13,7 +13,6 @@ class ordersFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     final DatabaseHelper datas = Get.put(DatabaseHelper());
 
-    // Ensure orders are loaded when the fragment is first built
     datas.loadOrders();
 
     return Scaffold(
@@ -39,18 +38,16 @@ class ordersFragment extends StatelessWidget {
                     itemCount: datas.orders.length,
                     itemBuilder: (context, index) {
                       final item = datas.orders[index];
-
-                      // Ensure that the map contains all keys before accessing them
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
                         child: Foodlisticonbutton(
-                          image: item['image'] ?? '', // Use null-aware operators
+                          image: item['image'] ?? '',
                           title: item['title'] ?? '',
                           description: item['description'] ?? '',
                           buttonColor: Colors.redAccent,
                           onButtonPressed: () {
                             if (item['id'] != null) {
-                              datas.deleteOrder(item['id']); // Ensure ID is not null
+                              datas.deleteOrder(item['id']);
                             }
                           },
                         ),
@@ -79,7 +76,7 @@ class ordersFragment extends StatelessWidget {
                     textColor: Colors.white,
                     radius: 6,
                     elevation: 0,
-                    onPressed: () => datas.clearOrders(),
+                    onPressed: () {dialogBuy(context, datas);},
                   ),
                   Expanded(child: Container()),
                 ],
@@ -89,6 +86,33 @@ class ordersFragment extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void dialogBuy(BuildContext context, DatabaseHelper datas) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm Payment'),
+          content: Text('Are you sure you want to proceed with payment and clear all orders?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () {
+                datas.clearOrders();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
