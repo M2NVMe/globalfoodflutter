@@ -7,7 +7,7 @@ class DatabaseHelper extends GetxController {
 
   var orders = <Map<String, dynamic>>[].obs;
 
-  // Getter to access the database
+  // init db thing
   Future<Database?> get db async {
     if (_db == null) {
       _db = await initDB();
@@ -15,7 +15,7 @@ class DatabaseHelper extends GetxController {
     return _db;
   }
 
-  // Initialize the database
+  // init db thing(2)
   Future<Database> initDB() async {
     var databasePath = await getDatabasesPath();
     String path = join(databasePath, 'orders_database.db');
@@ -36,40 +36,32 @@ class DatabaseHelper extends GetxController {
     );
   }
 
-  // Insert a new order
+  // Insert
   Future<int> addOrder(Map<String, dynamic> order) async {
     var dbClient = await db;
     int result = await dbClient!.insert('orders', order);
-    loadOrders(); // Refresh orders after insertion
+    loadOrders();
     return result;
   }
 
-  // Load all orders from the database
+  // Load
   Future<void> loadOrders() async {
     var dbClient = await db;
     List<Map<String, dynamic>> queryResult = await dbClient!.query('orders');
-    orders.assignAll(queryResult); // Assign the result to the observable list
+    orders.assignAll(queryResult);
   }
 
-  // Delete a specific order by ID
+  // Delete
   Future<void> deleteOrder(int id) async {
     var dbClient = await db;
     await dbClient!.delete('orders', where: 'id = ?', whereArgs: [id]);
-    loadOrders(); // Refresh orders after deletion
+    loadOrders();
   }
 
-  // Clear all orders and reset the table (including resetting the autoincrement index)
+  // Clear all
   Future<void> clearOrders() async {
     var dbClient = await db;
-    await dbClient!.execute('DROP TABLE IF EXISTS orders');
-    await dbClient!.execute('''
-      CREATE TABLE orders(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        image TEXT,
-        title TEXT,
-        description TEXT
-      )
-    ''');
-    loadOrders(); // Reload after clearing orders
+    await dbClient!.delete('orders');
+    loadOrders();
   }
 }

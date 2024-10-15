@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:globalfoodflutter/Reuses/foodlist.dart';
 import 'package:globalfoodflutter/Reuses/foodlisticonbutton.dart';
 import 'package:globalfoodflutter/Reuses/myButton.dart';
-import 'package:globalfoodflutter/datas/DatasController.dart';
 import 'package:get/get.dart';
 import 'package:globalfoodflutter/datas/newLocalDatabasethingamajig.dart';
 
@@ -12,9 +10,7 @@ class ordersFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DatabaseHelper datas = Get.put(DatabaseHelper());
-
     datas.loadOrders();
-
     return Scaffold(
       body: Container(
         child: Column(
@@ -76,7 +72,9 @@ class ordersFragment extends StatelessWidget {
                     textColor: Colors.white,
                     radius: 6,
                     elevation: 0,
-                    onPressed: () {dialogBuy(context, datas);},
+                    onPressed: () {
+                      dialogBuy(context, datas);
+                      },
                   ),
                   Expanded(child: Container()),
                 ],
@@ -95,7 +93,7 @@ class ordersFragment extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Confirm Payment'),
-          content: Text('Are you sure you want to proceed with payment and clear all orders?'),
+          content: Text('Proceed with current order and continue to payment?'),
           actions: <Widget>[
             TextButton(
               child: Text('Cancel'),

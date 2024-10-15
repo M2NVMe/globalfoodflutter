@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class LoginControl extends GetxController { // Change to PascalCase
+class LoginControl extends GetxController {
   var usr = ''.obs;
   var pws = ''.obs;
 

@@ -57,7 +57,7 @@ class homeFragment extends StatelessWidget {
                   return ListView.builder(
                     itemCount: datas.homeitems.length,
                     itemBuilder: (context, index) {
-                      final item = datas.popularitem[index];
+                      final item = datas.homeitems[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
                         child: CustomListItem(
