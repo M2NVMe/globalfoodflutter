@@ -17,14 +17,6 @@ class homeFragment extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
           children: [
             SizedBox(height: 50),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                "Home",
-                style: TextStyle(fontFamily: "Lexend", fontSize: 16),
-                textAlign: TextAlign.left,
-              ),
-            ),
             SizedBox(height: 22),
             Center( // Center the grey container
               child: ClipRRect(
@@ -44,8 +36,28 @@ class homeFragment extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
+                "About",
+                style: TextStyle(fontFamily: "Lexend", fontSize: 17),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            SizedBox(height: 10),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  " GLobalFood is an award winning cloud kitchen provider, with excellent food and service we will guarantee that our foods are great and high quality.",
+                  style: TextStyle(fontFamily: "Lexend", fontSize: 13),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ),
+            SizedBox(height: 25),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
                 "Recommendations",
-                style: TextStyle(fontFamily: "Lexend", fontSize: 16),
+                style: TextStyle(fontFamily: "Lexend", fontSize: 17),
                 textAlign: TextAlign.left,
               ),
             ),
