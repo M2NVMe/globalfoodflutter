@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globalfoodflutter/Reuses/foodlist.dart';
-import 'package:globalfoodflutter/Reuses/foodlistnobutton.dart';
+import 'package:globalfoodflutter/Reuses/foodlistsquare.dart';
 import 'package:globalfoodflutter/datas/DatasController.dart';
 import 'package:get/get.dart';
 

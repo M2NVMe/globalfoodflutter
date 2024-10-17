@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 // Reusable custom list item widget
-class CustomListItemNobutton extends StatelessWidget {
+class CustomListItemSquare extends StatelessWidget {
   final String image;
   final String title;
   final String description;
 
-  const CustomListItemNobutton({
+  const CustomListItemSquare({
     super.key,
     required this.image,
     required this.title,

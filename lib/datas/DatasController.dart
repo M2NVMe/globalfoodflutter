@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:globalfoodflutter/Reuses/foodlist.dart';
 import 'package:globalfoodflutter/Reuses/foodlisticonbutton.dart';
-import 'package:globalfoodflutter/Reuses/foodlistnobutton.dart';
+import 'package:globalfoodflutter/Reuses/foodlistsquare.dart';
 import 'package:globalfoodflutter/datas/newLocalDatabasethingamajig.dart';
 
 class datascontroller extends GetxController {
