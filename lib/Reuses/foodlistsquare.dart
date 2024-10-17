@@ -5,12 +5,20 @@ class CustomListItemSquare extends StatelessWidget {
   final String image;
   final String title;
   final String description;
+  final String buttonText;
+  final Color buttonColor;
+  final Color buttonTextColor;
+  final VoidCallback onButtonPressed;
 
   const CustomListItemSquare({
     super.key,
     required this.image,
     required this.title,
     required this.description,
+    required this.buttonText,
+    required this.buttonColor,
+    required this.buttonTextColor,
+    required this.onButtonPressed,
   });
 
   @override
@@ -28,7 +36,10 @@ class CustomListItemSquare extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TextStyle(fontSize:19, fontWeight: FontWeight.bold),),
+              Text(
+                title,
+                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 8),
               Text(description),
             ],
