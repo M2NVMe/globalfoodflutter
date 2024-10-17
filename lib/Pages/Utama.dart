@@ -13,7 +13,7 @@ class dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     final UtamaController controller = Get.put(UtamaController());
     final List<Widget> Fragments = [
-      homeFragment(),
+      HomeFragment(),
       foodsFragment(),
       ordersFragment(),
       profileFragment(),
