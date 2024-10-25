@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:globalfoodflutter/Reuses/foodlist.dart';
 import 'package:globalfoodflutter/Reuses/foodlisticonbutton.dart';
-import 'package:globalfoodflutter/Reuses/foodlistnobutton.dart';
+import 'package:globalfoodflutter/Reuses/foodlistsquare.dart';
+import 'package:globalfoodflutter/datas/newLocalDatabasethingamajig.dart';
 
 class datascontroller extends GetxController {
   var homeitems = <CustomListItem>[].obs;
   var menuitems = <CustomListItem>[].obs;
-  var popularitem = <CustomListItem>[].obs;
+  var popularitem = <CustomListItemSquare>[].obs;
   var orderitem = <Foodlisticonbutton>[].obs;
+  DatabaseHelper dbHelper = DatabaseHelper();
 
   @override
   void onInit() {
@@ -18,14 +20,16 @@ class datascontroller extends GetxController {
     loadhomeitems();
     loadmenuitems();
     loadpopular();
+    dbHelper.loadOrders();
   }
 
   void loadhomeitems() {
     homeitems.addAll([
-      CustomListItem(image: "lib/drawable/fotomakanan/bolu.png", title: "Bolu pandan", description: "Rp. 10,000 -- Regular size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/bolu.png", "Bolu pandan", "Rp. 10,000");}),
       CustomListItem(image: "lib/drawable/fotomakanan/cendol.jpg", title: "Cendol", description: "Rp. 5,000 -- Regular cup", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/cendol.jpg", "Cendol", "Rp. 5,000");}),
-      CustomListItem(image: "lib/drawable/fotomakanan/pizza1.jpg", title: "Pizza", description: "Rp. 25,000 -- Plate size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/pizza1.jpg", "Pizza", "Rp. 25,000");}),
+      CustomListItem(image: "lib/drawable/fotomakanan/bolu.png", title: "Bolu pandan", description: "Rp. 10,000 -- Regular size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/bolu.png", "Bolu pandan", "Rp. 10,000");}),
       CustomListItem(image: "lib/drawable/fotomakanan/burger1.jpg", title: "Burger", description: "Rp. 15,000 -- Regular size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/burger1.jpg", "Burger", "Rp. 15,000");}),
+      CustomListItem(image: "lib/drawable/fotomakanan/pizza1.jpg", title: "Pizza", description: "Rp. 25,000 -- Plate size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/pizza1.jpg", "Pizza", "Rp. 25,000");}),
+      CustomListItem(image: "lib/drawable/fotomakanan/icecream1.jpg", title: "Es Krim", description: "Rp. 5,000 -- Regular size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/icecream1.jpg", "Es krim", "Rp. 5,000");}),
     ]);
   }
 
@@ -43,39 +47,36 @@ class datascontroller extends GetxController {
 
   void loadpopular() {
     popularitem.addAll([
-      CustomListItem(image: "lib/drawable/fotomakanan/burger1.jpg", title: "Burger", description: "Rp. 15,000 -- Regular size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/burger1.jpg", "Burger", "Rp. 15,000");}),
-      CustomListItem(image: "lib/drawable/fotomakanan/pizza1.jpg", title: "Pizza", description: "Rp. 25,000 -- Plate size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/pizza1.jpg", "Pizza", "Rp. 25,000");}),
-      CustomListItem(image: "lib/drawable/fotomakanan/bolu.png", title: "Bolu pandan", description: "Rp. 10,000 -- Regular size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/bolu.png", "Bolu pandan", "Rp. 10,000");}),
+      CustomListItemSquare(image: "lib/drawable/fotomakanan/burger1.jpg", title: "Burger", description: "Rp. 15,000 -- Regular size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/burger1.jpg", "Burger", "Rp. 15,000");}),
+      CustomListItemSquare(image: "lib/drawable/fotomakanan/pizza1.jpg", title: "Pizza", description: "Rp. 25,000 -- Plate size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/pizza1.jpg", "Pizza", "Rp. 25,000");}),
+      CustomListItemSquare(image: "lib/drawable/fotomakanan/bolu.png", title: "Bolu pandan", description: "Rp. 10,000 -- Regular size", buttonText: "Order", buttonColor: Colors.green, buttonTextColor: Colors.white, onButtonPressed: () {addToOrders("lib/drawable/fotomakanan/bolu.png", "Bolu pandan", "Rp. 10,000");}),
     ]);
   }
 
-  void removeFromOrders(int index) {
-    if (index >= 0 && index < orderitem.length) {
-      orderitem.removeAt(index);
-    } else {
-      print("Invalid index: $index"); // Debugging purpose
+  void addToOrders(String image, String title, String description) async {
+    await dbHelper.addOrder({
+      'image': image,
+      'title': title,
+      'description': description,
+    });
+    updateOrderItems();
+  }
+
+  void updateOrderItems() {
+    orderitem.clear();
+    for (var order in dbHelper.orders) {
+      orderitem.add(Foodlisticonbutton(
+        image: order['image'],
+        title: order['title'],
+        description: order['description'],
+        buttonColor: Colors.redAccent,
+        onButtonPressed: () => dbHelper.deleteOrder(order['id']),
+      ));
     }
   }
 
-  void clearOrders() {
-    if (orderitem.isNotEmpty) {
-      orderitem.clear();
-      print("All items removed from orders."); // Optional for debugging
-    } else {
-      print("Order list is already empty."); // Optional for debugging
-    }
+  void clearOrders() async {
+    await dbHelper.clearOrders();
+    updateOrderItems();
   }
-
-
-  void addToOrders(String image, String title, String description) {
-    orderitem.add(Foodlisticonbutton(
-      image: image,
-      title: title,
-      description: description,
-      icon: Icon(Icons.cancel, color: Colors.white),
-      buttonColor: Colors.redAccent,
-      onButtonPressed: () => removeFromOrders(orderitem.length - 1),
-    ));
-  }
-
 }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:globalfoodflutter/Reuses/foodlist.dart';
 import 'package:globalfoodflutter/Reuses/foodlisticonbutton.dart';
 import 'package:globalfoodflutter/Reuses/myButton.dart';
-import 'package:globalfoodflutter/datas/DatasController.dart';
 import 'package:get/get.dart';
+import 'package:globalfoodflutter/datas/newLocalDatabasethingamajig.dart';
 
 class ordersFragment extends StatelessWidget {
   const ordersFragment({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final datascontroller datas = Get.put(datascontroller());
+    final DatabaseHelper datas = Get.put(DatabaseHelper());
+    datas.loadOrders();
     return Scaffold(
       body: Container(
         child: Column(
@@ -31,18 +31,21 @@ class ordersFragment extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Obx(() {
                   return ListView.builder(
-                    itemCount: datas.orderitem.length,
+                    itemCount: datas.orders.length,
                     itemBuilder: (context, index) {
-                      final item = datas.orderitem[index];
+                      final item = datas.orders[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
                         child: Foodlisticonbutton(
-                          image: item.image,
-                          title: item.title,
-                          description: item.description,
-                          icon: item.icon,
-                          buttonColor: item.buttonColor,
-                          onButtonPressed: () => datas.removeFromOrders(index),
+                          image: item['image'] ?? '',
+                          title: item['title'] ?? '',
+                          description: item['description'] ?? '',
+                          buttonColor: Colors.redAccent,
+                          onButtonPressed: () {
+                            if (item['id'] != null) {
+                              datas.deleteOrder(item['id']);
+                            }
+                          },
                         ),
                       );
                     },
@@ -69,7 +72,9 @@ class ordersFragment extends StatelessWidget {
                     textColor: Colors.white,
                     radius: 6,
                     elevation: 0,
-                    onPressed: () => datas.clearOrders(),
+                    onPressed: () {
+                      dialogBuy(context, datas);
+                      },
                   ),
                   Expanded(child: Container()),
                 ],
@@ -79,6 +84,33 @@ class ordersFragment extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void dialogBuy(BuildContext context, DatabaseHelper datas) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm Payment'),
+          content: Text('Proceed with current order and continue to payment?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () {
+                datas.clearOrders();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
