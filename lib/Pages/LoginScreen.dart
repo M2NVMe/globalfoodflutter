@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:globalfoodflutter/Pages/Controllers/LoginControl.dart';
+import 'package:globalfoodflutter/Pages/Controllers/responsifcontroller.dart';
 import 'package:globalfoodflutter/Reuses/myButton.dart';
 import 'package:globalfoodflutter/Reuses/myTextfield.dart';
 
@@ -10,6 +11,12 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LoginControl loginController = Get.put(LoginControl());
+    final ResponsifController responsifController = Get.find();
+
+    // Update screen width when the login screen is built
+    final screenWidth = MediaQuery.of(context).size.width;
+    responsifController.updateScreenWidth(screenWidth);
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -67,7 +74,7 @@ class LoginPage extends StatelessWidget {
               radius: 8,
               elevation: 0,
               onPressed: () {
-                loginController.login(); // Use existing instance
+                loginController.login();
               },
             ),
             Expanded(child: Container()),
