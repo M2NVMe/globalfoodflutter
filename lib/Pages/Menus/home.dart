@@ -17,19 +17,19 @@ class HomeFragment extends StatelessWidget {  // Use PascalCase for class name
         children: [
           Container(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 50),
-                Center( // Center the grey container
+                Center(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8), // Rounded corners with radius of 8
+                    borderRadius: BorderRadius.circular(8),
                     child: Container(
                       color: Color.fromARGB(255, 121, 121, 121),
                       width: 355,
                       height: 165,
                       child: Image.asset(
-                        'lib/drawable/Welcome.png', // Replace with your image asset path
-                        fit: BoxFit.contain, // Ensures the image covers the entire container
+                        'lib/drawable/Welcome.png',
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
