@@ -13,6 +13,7 @@ class HomeFragment extends StatelessWidget {  // Use PascalCase for class name
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: ListView(
         children: [
           Container(

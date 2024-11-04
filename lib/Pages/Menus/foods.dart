@@ -11,6 +11,7 @@ class foodsFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     final datascontroller datas = Get.put(datascontroller());
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         child: ListView(
           padding: EdgeInsets.zero,

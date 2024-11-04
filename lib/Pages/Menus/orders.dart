@@ -12,6 +12,7 @@ class ordersFragment extends StatelessWidget {
     final DatabaseHelper datas = Get.put(DatabaseHelper());
     datas.loadOrders();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

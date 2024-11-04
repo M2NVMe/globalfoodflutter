@@ -12,6 +12,7 @@ class Hometablet extends StatelessWidget {
     final datascontroller datas = Get.put(datascontroller());
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Row(
@@ -30,12 +31,12 @@ class Hometablet extends StatelessWidget {
                         fontSize: 35,),
                     ),
                   ),
-                  Expanded(child: SizedBox()),
+                  SizedBox(height: 70),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
                       color: Colors.grey[300],
-                      height: 250,
+                      height: 320,
                       child: Image.asset(
                         'lib/drawable/Welcome.png',
                         fit: BoxFit.cover,
@@ -53,8 +54,7 @@ class Hometablet extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(width: 40), // Space between the columns
-            // Right Side (Recommendations and List)
+            SizedBox(width: 40),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

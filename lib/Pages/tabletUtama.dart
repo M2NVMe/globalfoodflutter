@@ -36,12 +36,12 @@ class TabletDashboard extends StatelessWidget {
           Get.offNamed("/TabletDashboard");
         });
       }
-
       return Scaffold(
         body: Row(
           children: [
             // NavigationRail placed on the side
             NavigationRail(
+              indicatorColor: Colors.black12,
               selectedIndex: controller.selectedindex.value,
               onDestinationSelected: (int index) {
                 controller.changeMenu(index);
