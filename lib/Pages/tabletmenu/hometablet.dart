@@ -19,40 +19,43 @@ class Hometablet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 30),
-                  Center(
-                    child: Text(
-                      "Home",
-                      style: TextStyle(
-                        fontFamily: "Lexend",
-                        fontSize: 35,),
+              child:
+                  SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 30),
+                        Center(
+                          child: Text(
+                            "Home",
+                            style: TextStyle(
+                              fontFamily: "Lexend",
+                              fontSize: 35,),
+                          ),
+                        ),
+                        SizedBox(height: 70),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Container(
+                            color: Colors.grey[300],
+                            height: 320,
+                            child: Image.asset(
+                              'lib/drawable/Welcome.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 40),
+                        // Description
+                        Text(
+                          "GlobalFood is an award-winning cloud kitchen provider. With excellent food and service, we guarantee that our food is great and of high quality.",
+                          style: TextStyle(fontFamily: "Lexend", fontSize: 20),
+                          textAlign: TextAlign.left,
+                        ),
+                        Expanded(child: SizedBox()),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 70),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Container(
-                      color: Colors.grey[300],
-                      height: 320,
-                      child: Image.asset(
-                        'lib/drawable/Welcome.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 40),
-                  // Description
-                  Text(
-                    "GlobalFood is an award-winning cloud kitchen provider. With excellent food and service, we guarantee that our food is great and of high quality.",
-                    style: TextStyle(fontFamily: "Lexend", fontSize: 20),
-                    textAlign: TextAlign.left,
-                  ),
-                  Expanded(child: SizedBox()),
-                ],
-              ),
             ),
             SizedBox(width: 40),
             Expanded(
